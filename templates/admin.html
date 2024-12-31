@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F0F8FF;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            padding-top: 60px; /* To prevent overlap with fixed header */
+        }
+
+        /* Fixed welcome message and logout at the top */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10vh;
+            background-color: #00246B;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 1.2rem;
+            z-index: 100;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header .links{
+            width: 45%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .logo{
+            margin-left: 10px;
+            font-weight: 700;
+        }
+        
+
+        .links a{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+            font-weight: 400;
+            color: white;
+            text-decoration: none;
+        }
+        
+    
+        .container {
+            flex: 1;
+            padding: 20px;
+            margin-top: 60px; /* To create space under the header */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .event-item {
+            height: 40vh;
+            width: 45%;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .event-item p {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .event-item h2 {
+            margin-bottom: 15px;
+        }
+
+        .status {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .status.green {
+            color: green;
+        }
+
+        .status.red {
+            color: red;
+        }
+
+        /* Alternate card background colors */
+        .card-blue {
+            background-color: #00246B;
+            color: white;
+        }
+
+        .card-white {
+            background-color: white;
+            color: #00246B;
+        }
+
+        .card-blue input[type="submit"] {
+            background-color: white;
+            color: #00246B;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .card-white input[type="submit"] {
+            background-color: #00246B;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .card-white input[type="submit"]:hover{
+            background-color: white;
+            color: #00246B;
+            border-color: blue;
+        }
+
+        .card-blue input[type="submit"]:hover{
+            background-color: #00246B;
+            color: white;
+            border-color: white;
+        }
+
+        .card-blue button{
+            background-color: white;
+            color: white;
+        }
+
+        .card-white button a{
+            color: white;
+        }
+
+        .card-white button{
+            background-color: #00246B;
+        }
+
+        .card-blue button a{
+            color: #00246B;
+        }
+
+        .card-blue p{
+            color: white;
+        }
+
+        .header span{
+            margin-left: 10px;
+            animation: from-left 1s forwards;
+        }
+
+        @keyframes from-left {
+            from{
+                opacity: 0;
+                left: -100px;
+            }
+            to{
+                opacity: 1;
+                left: 0;
+            }
+        }
+
+        .container .event-item button{
+            width: 100px;
+            padding: 6px;
+            border-radius: 5px;
+        }
+
+        .container .event-item button a{
+            text-decoration: none;
+        }
+
+        .notify-div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .notify{
+            color :#00246B;
+            animation: blink-inf 1s infinite; 
+        }
+
+        .notify-div button{
+            width: 150px;
+            height: 50px;
+            background-color: #00246B;
+            border-radius: 5px;
+        }
+
+        .notify-div button a{
+            text-decoration: none;
+            color: white;
+        }
+        
+        
+        @keyframes blink-inf {
+            from{
+                opacity: 0;
+            }
+            to{
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <span>WELCOME, {{ session['user'].upper() }} </span>
+        </div>
+        <div class="links">
+            <a href="/notifications">Notification Center</a>
+            <a href="/getall">Bookings</a>
+            <a href="/addevent">Add Event</a>
+            <a href="/createadmin">Create Admin</a>
+            <a href="/logout" onclick="alert('Your session may be deleted')">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        {% if not events%}
+            <div class="notify-div">
+                <h1 class="notify">No Events Yet!</h1>
+                <button><a href="/addevent"><strong>Add First Event</strong></a></button>
+        {% else %}
+            {% for event in events %}
+                <form action="/delete/{{ event.id }}" class="event-item {% if loop.index is even %}card-blue{% else %}card-white{% endif %}">
+                    <h2>{{ event.event_name }}</h2>
+                    <p><strong>Capacity:</strong> {{ event.capacity }}</p>
+                    <p><strong>Location:</strong> {{ event.location }}</p>
+                    <p><strong>Price per Hour:</strong> {{ event.price_per_hour }}</p>
+                    <p class="status {% if event.status %}green{% else %}red{% endif %}">
+                        {% if event.status %}
+                            <input type="hidden" name="event_name" value="{{ event.event_name }}">
+                            <input type="submit" value="Book Now" style="font-weight: 600;">
+                        {% else %}
+                            Booked
+                        {% endif %}
+                    </p>
+                    {% if event.id %}
+                        <input type="submit" value="Delete" style="font-weight: 600;">
+                    {% endif %}
+                </form>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>

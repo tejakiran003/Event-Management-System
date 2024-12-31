@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #CADCFC;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
+            width: 80%;
+            height: 88vh;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden; /* Ensures no content spills outside the container */
+        }
+
+        .description {
+            width: 50%;
+            padding: 30px;
+            background-color: #00246B; /* Bright contrasting color */
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .description h1 {
+            font-size: 2.8rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .description p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .links {
+            width: 50%;
+            padding: 20px;
+            background-color: #F0F8FF; /* Light complementary color */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .links h2 {
+            font-size: 2rem;
+            color: #00246B;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .links a {
+            display: inline-block;
+            width: 220px;
+            text-align: center;
+            padding: 12px 20px;
+            margin: 10px 0;
+            text-decoration: none;
+            font-size: 1.2rem;
+            color: white;
+            background-color: #00246B;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+
+        .links a:hover {
+            background-color: #0056b3;
+            transform: scale(1.05); /* Slight animation on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Bright Section -->
+        <div class="description">
+            <h1>Plan Your Events With Ease</h1>
+            <p>
+                Discover the ultimate event management solution designed to simplify your planning process. 
+                From organizing guest lists to managing schedules, we’ve got you covered. 
+                Get started now and bring your ideas to life!
+            </p>
+        </div>
+
+        <!-- Light Section with Links -->
+        <div class="links">
+            <h2>Get Started</h2>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        </div>
+    </div>
+</body>
+</html>
