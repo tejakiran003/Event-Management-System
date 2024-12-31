@@ -58,13 +58,3 @@ This Flask project is an Event Booking System that allows users to view availabl
      ```
 
 # **HAPPY BOOKING**
-
-## **Credits and Contact:**
-  For any inquiries or questions, feel free to reach out:
-  - Santosh Varma Addala - [santoshvarma2166@gmail.com]
-    GitHub: https://github.com/santoshvarmaaddala
-
-  - Manoj Rayi - [rayimanoj8@gmail.com]
-    GitHub: https://github.com/rayimanoj8
-  
-
