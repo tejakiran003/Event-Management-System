@@ -29,7 +29,7 @@ This Flask project is an Event Booking System that allows users to view availabl
 
   1. **Clone the repository:**
      ```bash
-     git clone https://github.com/santoshvarmaaddala/Event-Management-System.git
+     https://github.com/tejakiran003/Event-Management-System
      ```
   2. **Navigate into the project directory:**
      ```bash
